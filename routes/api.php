@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 
+$api = app('Dingo\Api\Routing\Router');
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -15,6 +17,7 @@ use Illuminate\Http\Request;
 
 $api->version('v1', [
    'namespace' => 'App\Http\Controllers\Api',
+   'middleware' => 'serializer:array'
 ], function ($api) {
     $api->group([
         'middleware' => 'api.throttle',
@@ -22,5 +25,20 @@ $api->version('v1', [
         'expires' => config('api.rate_limits.sign.expires'),
     ], function ($api) {
 
+    });
+
+    $api->group([
+        'middleware' => 'api.throttle',
+        'limit' => config('api.rate_limits.access.limit'),
+        'expires' => config('api.rate_limits.access.expires'),
+    ], function ($api) {
+        // 游客可以访问的接口
+        $api->get('categories', 'CategoriesController@index')
+            ->name('api.categories.index');
+
+        // 需要 Token 验证的接口
+        $api->group(['middleware' => 'api.auth'], function ($api) {
+            // 当前登录用户信息
+        });
     });
 });
