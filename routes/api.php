@@ -57,7 +57,12 @@ $api->version('v1', [
         // 需要 Token 验证的接口
         $api->group(['middleware' => 'api.auth'], function ($api) {
             // 当前登录用户信息
+            $api->get('user', 'RegisterController@me')
+                ->name('api.user.show');
 
+            // 发布话题
+            $api->post('topics', 'TopicsController@store')
+                ->name('api.topics.store');
         });
     });
 });
