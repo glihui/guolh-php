@@ -6,7 +6,7 @@ use App\Models\Topic;
 use Illuminate\Http\Request;
 use App\Transformers\TopicTransformer;
 use App\Http\Requests\Api\TopicRequest;
-
+use App\Models\User;
 
 class TopicsController extends Controller
 {
@@ -32,6 +32,18 @@ class TopicsController extends Controller
 
         return $this->response->paginator($topics, new TopicTransformer());
 
+    }
 
+    public function userIndex(User $user, Request $request)
+    {
+        $topics = $user->topics()->recent()
+            ->paginate(20);
+
+        return $this->response->paginator($topics, new TopicTransformer());
+    }
+
+    public function show(Topic $topic)
+    {
+        return $this->response->item($topic, new TopicTransformer());
     }
 }
