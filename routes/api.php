@@ -67,6 +67,10 @@ $api->version('v1', [
             // 发布话题
             $api->post('topics', 'TopicsController@store')
                 ->name('api.topics.store');
+
+            // 发布回复
+            $api->post('topics/{topic}/replies', 'RepliesController@store')
+                ->name('api.topics.replies.store');
         });
     });
 });
