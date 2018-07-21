@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Topic;
+use App\Models\zan;
+use Dingo\Api\Auth\Auth;
 use Illuminate\Http\Request;
 use App\Transformers\TopicTransformer;
 use App\Http\Requests\Api\TopicRequest;
@@ -28,6 +30,8 @@ class TopicsController extends Controller
             $query->where('category_id', $categoryId);
         }
 
+
+
         $topics = $query->paginate(20);
 
         return $this->response->paginator($topics, new TopicTransformer());
@@ -46,5 +50,7 @@ class TopicsController extends Controller
     {
         return $this->response->item($topic, new TopicTransformer());
     }
+
+
     
 }

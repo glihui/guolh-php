@@ -18,6 +18,7 @@ class AppServiceProvider extends ServiceProvider
 
         \App\Models\User::observe(\App\Observers\UserObserver::class);
         \App\Models\Reply::observe(\App\Observers\ReplyObserver::class);
+        \App\Models\zan::observe(\App\Observers\zanObserver::class);
     }
 
     /**

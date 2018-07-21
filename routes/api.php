@@ -83,6 +83,14 @@ $api->version('v1', [
             // 删除回复
             $api->delete('topics/{topic}/replies/{reply}', 'RepliesController@destroy')
                 ->name('api.topics.replies.destroy');
+
+            // 赞话题
+            $api->post('topics/{topic}/zans', 'zansController@store')
+                ->name('api.topics.zans.store');
+
+            // 取消赞
+            $api->delete('topics/{topic}/zans', 'zansController@destroy')
+                ->name('api.topics.zans.destroy');
         });
     });
 });

@@ -45,5 +45,17 @@ class Topic extends Model
     {
         return $query->orderBy('created_at', 'desc');
     }
+
+    //  关联用户赞
+    public function zan($user_id)
+    {
+        return $this->hasOne(zan::class)->where('user_id', $user_id);
+    }
+
+    // 文章的所有赞
+    public function zans()
+    {
+        return $this->hasMany(zan::class);
+    }
 }
 

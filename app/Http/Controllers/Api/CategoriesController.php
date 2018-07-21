@@ -19,6 +19,19 @@ class CategoriesController extends Controller
     {
         $topics = $topic->where('category_id', $category->id)
             ->paginate(20);
+
+
+
+        foreach ($topics as $v) {
+            if (\Auth::guard('api')->check()) {
+                if ($v->zan($this->user()->id)->exists()) {
+                    $v->is_zan = 1;
+                } else {
+                    $v->is_zan = 0;
+                }
+            }
+
+        }
         return $this->response->paginator($topics, new TopicTransformer());
     }
 }
