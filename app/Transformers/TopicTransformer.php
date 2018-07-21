@@ -20,6 +20,7 @@ class TopicTransformer extends TransformerAbstract
           'category_id' => (int) $topic->category_id,
           'reply_count' => (int) $topic->reply_count,
           'view_count' => (int) $topic->view_count,
+          'zan_count' => (int) $topic->zan_count,
           'is_zan' => (int) $topic->is_zan,
           'created_at' => $topic->created_at->toDateTimeString(),
           'updated_at' => $topic->updated_at->toDateTimeString(),
