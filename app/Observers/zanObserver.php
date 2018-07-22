@@ -13,4 +13,12 @@ class zanObserver
 
 
     }
+
+//    public function deleted(zan $zan)
+//    {
+//        $topic = $zan->topic;
+//        $topic->decrement('zan_count', 1);
+//    }
+
+
 }

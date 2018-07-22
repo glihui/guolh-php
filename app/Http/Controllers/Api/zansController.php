@@ -28,7 +28,9 @@ class zansController extends Controller
     public function destroy(Topic $topic, zan $zan) {
         $result = $topic->zan($this->user()->id);
         if ($result->exists()) {
-            $topic->zan($this->user()->id)->delete();
+
+            $result->delete();
+            $topic->decrement('zan_count', 1);
             return ['ok' => '1', 'msg' => '取消点赞'];
         } else {
             return ['ok' => '0', 'msg' => '还未点赞过'];
